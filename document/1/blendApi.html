@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="King-king.GitHub.io : 混合（溶色）滤镜接口使用说明">
+    <title>King-king.GitHub.io</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../stylesheets/stylesheet.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+        <a id="forkme_banner" href="https://github.com/king-king">View on GitHub</a>
+
+        <h1 id="project_title">混合（溶色）滤镜接口使用说明</h1>
+        <h2 id="project_tagline"></h2>
+
+    </header>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+        <p>图像混合算法，模仿ps的图层混合功能，可以对指定的两个图层进行混合，实现不同色彩风格的图像效果。</p>
+        <p>
+            调用blend接口，可以实现两张图片的混合，该函数有5个参数，用法如下所示：
+        </p>
+        <pre>
+            <code>
+                var imgData = blend( img1, img2, width, height, model );
+                gc.putImageData(imgData,0,0);
+            </code>
+        </pre>
+        <p>其中model代表不同的混合模式，是一个字符串，可以有如下的取值：</p>
+        <pre>
+            <code>
+                "exclude": // 排除
+                "D-value":// 差值
+                "Hard-Mix":// 实色混合
+                "Pin-Light":// 点光
+                "Linear-Light":// 线性光
+                "Hard-Light":// 强光
+                "Soft-Light":// 柔光
+                "overlap":// 叠加
+            </code>
+        </pre>
+        <p>model可以不赋值或一个无效值，这时采用的是Color-Dodqe 滤色模式</p>
+        <h3>效果展示:</h3>
+    </section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+    <footer class="inner">
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+    </footer>
+</div>
+<script>
+    (function () {
+        function loopArray( arr, func ) {
+            for ( var i = 0; i < arr.length; i++ ) {
+                func( arr[i], i )
+            }
+        }
+
+        var flags = [
+            "Color-Dodqe 滤色模式",
+            "exclude 排除",
+            "D-value 差值",
+            "Hard-Mix 实色混合",
+            "Pin-Light 点光",
+            "Linear-Light 线性光",
+            "Hard-Light 强光",
+            "Soft-Light 柔光",
+            "overlap 叠加"
+        ];
+        var img1 = new Image();
+        var img2 = new Image();
+        img1.src = "img/1.jpg";
+        img2.src = "img/rainbow.png";
+        var count = 0;
+        var content = document.querySelector( "#main_content" );
+        loopArray( [img1, img2], function ( img ) {
+            img.onload = function () {
+                count++;
+                if ( count == 2 ) {
+                    loopArray( flags, function ( title ) {
+                        var data = blend( img1, img2, title.split( " " )[0] );
+                        var canvas = document.createElement( "canvas" );
+                        canvas.width = canvas.height = 300;
+                        canvas.getContext( "2d" ).putImageData( data, 0, 0 );
+                        var p = document.createElement( "p" );
+                        p.innerHTML = title;
+                        content.appendChild( document.createElement( "br" ) );
+                        content.appendChild( p );
+                        content.appendChild( canvas );
+                    } );
+                }
+            }
+        } );
+
+        function blend( img1, img2, model ) {
+            var canvas1 = document.createElement( "canvas" );
+            var canvas2 = document.createElement( "canvas" );
+            canvas1.width = canvas1.height = canvas2.width = canvas2.height = 300;
+            var gc1 = canvas1.getContext( "2d" );
+            var gc2 = canvas2.getContext( "2d" );
+            gc1.drawImage( img1, 0, 0, 300, 300 );
+            gc2.drawImage( img2, 0, 0, 300, 300 );
+            var imgData1 = gc1.getImageData( 0, 0, 300, 300 );
+            var imgData2 = gc2.getImageData( 0, 0, 300, 300 );
+
+            function loopArray( arr, step, func ) {
+                for ( var i = 0; i < arr.length; i += step ) {
+                    func( i );
+                }
+            }
+
+            function process() {
+                switch ( model ) {
+                    case "exclude": // 排除
+                        loopArray( imgData1.data, 4, function ( i ) {
+                            imgData1.data[i] = (imgData1.data[i] + imgData2.data[i] - 2 * imgData1.data[i] * imgData2.data[i] / 255) << 0;
+                            imgData1.data[i + 1] = (imgData1.data[i + 1] + imgData2.data[i + 1] - 2 * imgData1.data[i + 1] * imgData2.data[i + 1] / 255) << 0;
+                            imgData1.data[i + 2] = (imgData1.data[i + 2] + imgData2.data[i + 2] - 2 * imgData1.data[i + 2] * imgData2.data[i + 2] / 255) << 0;
+                        } );
+                        break;
+                    case "D-value":// 差值
+                        loopArray( imgData1.data, 4, function ( i ) {
+                            imgData1.data[i] = Math.abs( imgData1.data[i] - imgData2.data[i] );
+                            imgData1.data[i + 1] = Math.abs( imgData1.data[i + 1] - imgData2.data[i + 1] );
+                            imgData1.data[i + 2] = Math.abs( imgData1.data[i + 2] - imgData2.data[i + 2] );
+                        } );
+                        break;
+                    case "Hard-Mix":// 实色混合
+                        loopArray( imgData1.data, 4, function ( i ) {
+                            imgData1.data[i] = (imgData1.data[i] < 128 ?
+                                    (imgData1.data[i] == 0 ? 2 * imgData1.data[i] : Math.max( 0, (255 - ((255 - imgData2.data[i]) << 8 ) / (2 * imgData1.data[i])) )) :
+                                    ((2 * (imgData1.data[i] - 128)) == 255 ? (2 * (imgData1.data[i] - 128)) : Math.min( 255, ((imgData2.data[i] << 8 ) / (255 - (2 * (imgData1.data[i] - 128)) )) ))) < 128 ?
+                                    0 : 255;
+                            imgData1.data[i + 1] = (imgData1.data[i + 1] < 128 ?
+                                    (imgData1.data[i + 1] == 0 ? 2 * imgData1.data[i + 1] : Math.max( 0, (255 - ((255 - imgData2.data[i + 1]) << 8 ) / (2 * imgData1.data[i + 1])) )) :
+                                    ((2 * (imgData1.data[i + 1] - 128)) == 255 ? (2 * (imgData1.data[i + 1] - 128)) : Math.min( 255, ((imgData2.data[i + 1] << 8 ) / (255 - (2 * (imgData1.data[i + 1] - 128)) )) ))) < 128 ?
+                                    0 : 255;
+                            imgData1.data[i + 2] = (imgData1.data[i + 2] < 128 ?
+                                    (imgData1.data[i + 2] == 0 ? 2 * imgData1.data[i + 2] : Math.max( 0, (255 - ((255 - imgData2.data[i + 2]) << 8 ) / (2 * imgData1.data[i + 2])) )) :
+                                    ((2 * (imgData1.data[i + 2] - 128)) == 255 ? (2 * (imgData1.data[i + 2] - 128)) : Math.min( 255, ((imgData2.data[i + 2] << 8 ) / (255 - (2 * (imgData1.data[i + 2] - 128)) )) ))) < 128 ?
+                                    0 : 255;
+                        } );
+                        break;
+                    case "Pin-Light":// 点光
+                        loopArray( imgData1.data, 4, function ( i ) {
+                            imgData1.data[i] = Math.max( 0, Math.max( 2 * imgData2.data[i] - 255, Math.min( imgData2.data[i], 2 * imgData1.data[i] ) ) );
+                            imgData1.data[i + 1] = Math.max( 0, Math.max( 2 * imgData2.data[i + 1] - 255, Math.min( imgData2.data[i + 1], 2 * imgData1.data[i + 1] ) ) );
+                            imgData1.data[i + 2] = Math.max( 0, Math.max( 2 * imgData2.data[i + 2] - 255, Math.min( imgData2.data[i + 2], 2 * imgData1.data[i + 2] ) ) );
+                        } );
+                        break;
+                    case "Linear-Light":// 线性光
+                        loopArray( imgData1.data, 4, function ( i ) {
+                            imgData1.data[i] = Math.min( 255, Math.max( 0, (imgData2.data[i] + 2 * imgData1.data[i]) - 1 ) );
+                            imgData1.data[i + 1] = Math.min( 255, Math.max( 0, (imgData2.data[i + 1] + 2 * imgData1.data[i + 1]) - 1 ) );
+                            imgData1.data[i + 2] = Math.min( 255, Math.max( 0, (imgData2.data[i + 2] + 2 * imgData1.data[i + 2]) - 1 ) );
+                        } );
+                        break;
+                    case "Hard-Light":// 强光
+                        loopArray( imgData1.data, 4, function ( i ) {
+                            imgData1.data[i] = ( (imgData1.data[i] < 128) ? (2 * imgData1.data[i] * imgData2.data[i] / 255) : (255 - 2 * (255 - imgData1.data[i]) * (255 - imgData2.data[i]) / 255)) << 0;
+                            imgData1.data[i + 1] = ( (imgData1.data[i + 1] < 128) ? (2 * imgData1.data[i + 1] * imgData2.data[i + 1] / 255) : (255 - 2 * (255 - imgData1.data[i + 1]) * (255 - imgData2.data[i + 1]) / 255)) << 0;
+                            imgData1.data[i + 2] = ( (imgData1.data[i + 2] < 128) ? (2 * imgData1.data[i + 2] * imgData2.data[i + 2] / 255) : (255 - 2 * (255 - imgData1.data[i + 2]) * (255 - imgData2.data[i + 2]) / 255)) << 0;
+                        } );
+                        break;
+                    case "Soft-Light":// 柔光
+                        loopArray( imgData1.data, 4, function ( i ) {
+                            imgData1.data[i] = (imgData2.data[i] < 128 ?
+                                    (2 * (( imgData1.data[i] >> 1) + 64)) * (imgData2.data[i] / 255)
+                                            :
+                                            (255 - ( 2 * (255 - ( (imgData1.data[i] >> 1) + 64 ) ) * ( 255 - imgData2.data[i] ) / 255 ))) << 0;
+                            imgData1.data[i + 1] = (imgData2.data[i + 1] < 128 ?
+                                    (2 * (( imgData1.data[i + 1] >> 1) + 64)) * (imgData2.data[i + 1] / 255)
+                                            :
+                                            (255 - ( 2 * (255 - ( (imgData1.data[i + 1] >> 1) + 64 ) ) * ( 255 - imgData2.data[i + 1] ) / 255 ))) << 0;
+                            imgData1.data[i + 2] = (imgData2.data[i + 2] < 128 ?
+                                    (2 * (( imgData1.data[i + 2] >> 1) + 64)) * (imgData2.data[i + 2] / 255)
+                                            :
+                                            (255 - ( 2 * (255 - ( (imgData1.data[i + 2] >> 1) + 64 ) ) * ( 255 - imgData2.data[i + 2] ) / 255 ))) << 0;
+                        } );
+                        break;
+                    case "overlap":// 叠加
+                        loopArray( imgData1.data, 4, function ( i ) {
+                            imgData1.data[i] = ( (imgData2.data[i] < 128) ? (2 * imgData1.data[i] * imgData2.data[i] / 255) : (255 - 2 * (255 - imgData1.data[i]) * (255 - imgData2.data[i]) / 255)) << 0;
+                            imgData1.data[i + 1] = ( (imgData2.data[i + 1] < 128) ? (2 * imgData1.data[i + 1] * imgData2.data[i + 1] / 255) : (255 - 2 * (255 - imgData1.data[i + 1]) * (255 - imgData2.data[i + 1]) / 255) ) << 0;
+                            imgData1.data[i + 2] = ( (imgData2.data[i + 2] < 128) ? (2 * imgData1.data[i + 2] * imgData2.data[i + 2] / 255) : (255 - 2 * (255 - imgData1.data[i + 2]) * (255 - imgData2.data[i + 2]) / 255)   ) << 0;
+                        } );
+                        break;
+                    default:
+                        //Color-Dodqe 滤色
+                        loopArray( imgData1.data, 4, function ( i ) {
+                            imgData1.data[i] = 255 - (((255 - imgData1.data[i]) * (255 - imgData2.data[i])) >> 8);
+                            imgData1.data[i + 1] = 255 - (((255 - imgData1.data[i + 1]) * (255 - imgData2.data[i + 1])) >> 8);
+                            imgData1.data[i + 2] = 255 - (((255 - imgData1.data[i + 2]) * (255 - imgData2.data[i + 2])) >> 8);
+                        } );
+                }
+            }
+
+            process();
+
+            return imgData1;
+        }
+    })();
+</script>
+
+</body>
+</html>
