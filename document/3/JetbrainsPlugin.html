@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="King-king.GitHub.io ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../stylesheets/stylesheet.css">
+
+    <title>King-king.GitHub.io</title>
+    <style>
+        li {
+            list-style: circle;
+        }
+
+        li.number {
+            list-style: decimal;
+        }
+
+        li.square {
+            list-style: square;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+        <a id="forkme_banner" href="https://github.com/king-king">View on GitHub</a>
+
+        <h1 id="project_title">King-king.GitHub.io</h1>
+        <h2 id="project_tagline"></h2>
+
+    </header>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+        <p>
+            jetbrains公司开发的几款产品之间的插件都是相通的，intellij上能用的插件如果不涉及到语言特性的话也能在webstorm等产品
+            上使用。类似eclipse上可以专门新建一个插件工程，我们也可以在intellij上新建一个工程专门开发插件。
+        </p>
+        <p>
+            作为第一个插件练习，我已经写了一个hello word版的插件，接下来希望写一个更加实用的插件，实现分析webstorm中包引用的功能。
+        </p>
+        <p>
+            如果要开发这个插件，目前可以预见的难题是：
+        <ul>
+            <li>action的触发条件是什么。希望当选中一个文件，点击鼠标右键的时候在弹出列表中可以有这个选项，这个触发条件是什么</li>
+            <li>如何获取选中的文件及其内容</li>
+            <li>如何已知文件路径获取文件内容（这个可以使用java的io来做，但更希望用intellij自己提供的接口）</li>
+            <li>如何将结果绘制出来</li>
+        </ul>
+        当然，最大的难题还是intellij插件开发的资料不够，感到困难，只能是看一些其他人开发（大多是老外）的插件来学习。
+        </p>
+
+    </section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+    <footer class="inner">
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+    </footer>
+</div>
+
+
+</body>
+</html>
