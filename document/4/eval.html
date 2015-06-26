@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="King-king.GitHub.io ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../stylesheets/stylesheet.css">
+
+    <title>King-king.GitHub.io</title>
+    <style>
+        li {
+            list-style: circle;
+        }
+
+        li.number {
+            list-style: decimal;
+        }
+
+        li.square {
+            list-style: square;
+        }
+
+        pre {
+            background: #ddd;
+            color: #0086b3;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+        <a id="forkme_banner" href="https://github.com/king-king">View on GitHub</a>
+
+        <h1 id="project_title">eval函数用法心得</h1>
+        <h2 id="project_tagline"></h2>
+
+    </header>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+        <p>
+            一个函数能够访问到什么，取决于函数定义的上下文，而不是调用的上下文。但是有些时候就希望能够让函数访问到调用处的代码，这种情况下用eval就比较合适。
+        </p>
+        <p>
+            通常对eval的介绍就是传入一个字符串，然后将该字符串当作js代码来执行，如果仅仅是这样，eval的效力还小点，eval比较让我感觉特别好的是上面提到的，改变执行的上下文。
+        </p>
+        <p>
+            当然，最近写了一个包模块管理的系统，发现了eval函数的一个妙用，特地分享一下。
+        </p>
+        <p>
+            包管理中，每个js文件都是一个模块，里面的代码用Package包裹起来，像这样：
+        </p>
+        <pre>
+            Package(function(){
+                /*
+                    do something
+                */
+            });
+        </pre>
+        <p>
+            真正要执行的代码是Package函数的参数，Package函数好像一个壳子，在发布代码的时候，我希望能够把零散的代码进行合并，合并成一个脚本文件，要去掉Package函数。去掉Package函数的方法有，比如读取到该脚本的内容后，进行字符分析，把需要的东西提取出来。但是我想介绍的是一个最简单的方法，用eval函数来实现“去壳”。
+        </p>
+        <p>
+            用node.js來做文件io操作，取得脚本文件的内容，假定内容存放在变量content中。
+        </p>
+        <pre>
+            function Package(func){
+                console.log(func)
+            }
+            eval(content);
+        </pre>
+        <p>
+            这种方法比起进行字符分析要省力的多，而且完全没有副作用，执行执行了一个函数，没有涉及到任何变量的修改。
+        </p>
+
+    </section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+    <footer class="inner">
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+    </footer>
+</div>
+
+
+</body>
+</html>
