@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="King-king.GitHub.io ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../stylesheets/stylesheet.css">
+
+    <title>King-king.GitHub.io</title>
+    <style>
+        li {
+            list-style: circle;
+        }
+
+        li.number {
+            list-style: decimal;
+        }
+
+        li.square {
+            list-style: square;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+        <a id="forkme_banner" href="https://github.com/king-king">View on GitHub</a>
+
+        <h1 id="project_title">微信bug记录&解决方案</h1>
+        <h2 id="project_tagline"></h2>
+
+    </header>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+        <strong>一、ios中图片二维码识别有效区域bug</strong>
+        <p>时常感到这个二维码识别并不是特别准确，有时候能识别出来，但有时候识别不出来。今天看了一篇文章（<a href="http://devework.com/weixin-qrcode-bug.html">前端页面中
+            iOS 版微信长按识别二维码的bug 与解决方案</a>），实践了一下，发现的确如此。可以很不错的提高ios上二维码识别成功率。
+        </p>
+        <p>
+            简单来说，微信在识别图片的时候，没有把微信导航栏的高度计算进去，所以会有一个64px的位移，也就是实际有效的点击识别区域是图片的上移64px后的区域，这个bug只在ios上存在，安卓上没有。可以到这个地址验证：<a href="1-ex.html">示例</a>。在这个页面中我们可以看到ios微信识别二维码的真正有效区域是蓝色部分，二维码下面有一部分长按无法识别。
+        </p>
+        <p>最简单的解决方案是给二维码图片添加一个css，设置padding-bottom为64px，可以很好的解决点击区域和图片不对应的问题。</p>
+
+    </section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+    <footer class="inner">
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+    </footer>
+</div>
+
+
+</body>
+</html>
