@@ -144,7 +144,6 @@
             } );
         }
 
-        var handles = [];
         var sources = ["img/h.jpg", "img/h4.jpg", "img/h3.jpg", "img/h2.jpg"];
 
         function map( array, func ) {
@@ -156,20 +155,12 @@
         }
 
 
-        concurrentTask( map( sources, function ( src ) {
-            return function ( done ) {
-                lowPoly( src, function ( e ) {
-                    handles.push( e.draw );
-                    done();
-                } );
-            }
-        } ), function () {
-            setTimeout( function () {
-                handles.forEach( function ( draw ) {
-                    draw();
-                } )
-            }, 4000 );
+        sources.forEach( function ( src ) {
+            lowPoly( src, function ( e ) {
+                e.draw()
+            } );
         } );
+
 
     })();
 </script>
