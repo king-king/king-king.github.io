@@ -101,7 +101,7 @@
 </head>
 <body>
 <div class="img-border">
-    <img src="img/1.jpg">
+    <img src="../img/1.jpg">
 </div>
 <div class="panel">
     <form>
@@ -258,10 +258,12 @@
                     frame.removeChild( frameItem );
                     if ( frames[frameItem.index - 1] ) {
                         frameItem = frames[frameItem.index - 1];
+                        frameItem.classList.add( "select" );
                         flushData();
                     }
                     else if ( frames[frameItem.index + 1] ) {
                         frameItem = frames[frameItem.index + 1];
+                        frameItem.classList.add( "select" );
                         flushData();
                     }
                     else {
