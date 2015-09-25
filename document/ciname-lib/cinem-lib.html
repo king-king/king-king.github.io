@@ -41,6 +41,11 @@
             right: 0;
         }
 
+        .panel-item span {
+            color: blue;
+            font-weight: bolder;
+        }
+
         .panel-item, .panel-item2 {
             height: 60px;
             line-height: 60px;
@@ -121,14 +126,17 @@
         <div class="panel-item x value">
             <div class="title">x:</div>
             -100<input type="range" value="0" min="-100" max="100" step="1">100%
+            <span></span>
         </div>
         <div class="panel-item y value">
             <div class="title">y:</div>
             -100<input type="range" value="0" min="-100" max="100" step="1">100%
+            <span></span>
         </div>
         <div class="panel-item scale value">
             <div class="title">scale:</div>
             &nbsp;0&nbsp;<input type="range" value="1" min="0" max="5" step="0.1">5
+            <span></span>
         </div>
         <div class="panel-item rotate value">
             <div class="title">rotate:</div>
@@ -366,13 +374,13 @@
                     if ( e.which == 2 ) {
                         switch ( i ) {
                             case 0:
-                                input.value = 0;
+                                input.nextElementSibling.innerText = input.value = 0;
                                 break;
                             case 1:
-                                input.value = 0;
+                                input.nextElementSibling.innerText = input.value = 0;
                                 break;
                             case 2:
-                                input.value = 1;
+                                input.nextElementSibling.innerText = input.value = 1;
                                 break;
                         }
                     }
@@ -384,6 +392,7 @@
                     },
                     onDrag : function () {
                         change();
+                        input.nextElementSibling.innerText = input.value;
                         console.log( "ok" )
                     },
                     onUp : function () {
