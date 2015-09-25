@@ -26,6 +26,7 @@
             right: 50%;
             position: absolute;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .img-border img {
@@ -113,6 +114,8 @@
 <div class="img-border">
     <img src="img/1.jpg">
 </div>
+<input type="file" class="hide file" accept=".png,.jpg,.jpeg">
+
 <div class="panel">
     <form>
         <div class="panel-item x value">
@@ -163,6 +166,16 @@
         var duration = querySelector( ".duration" );
         var animateBtn = querySelector( ".btn.animate" );
         var copyBtn = querySelector( ".btn.copy" );
+        var fileInput = querySelector( "input.file" );
+        var imgBorder = querySelector( ".img-border" );
+
+        imgBorder.onclick = function () {
+//            fileInput.click();
+        };
+
+        fileInput.onchange = function () {
+            img.src = window.URL.createObjectURL( fileInput.files[0] );
+        };
 
         function loopArray( arr, func ) {
             for ( var i = 0; i < arr.length; i++ ) {
