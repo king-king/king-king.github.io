@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="mobileoptimized" content="0"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="browsermode" content="application">
+    <title></title>
+    <style>
+
+        * {
+            -webkit-user-select: none;
+        }
+
+        input {
+            -webkit-user-select: text;
+        }
+
+        .img-border {
+            border: 5px solid black;
+            width: 450px;
+            height: 450px;
+            top: 10px;
+            right: 50%;
+            position: absolute;
+            overflow: hidden;
+        }
+
+        .img-border img {
+            width: 100%;
+        }
+
+        .panel {
+            position: absolute;
+            left: 60%;
+            top: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        .panel-item {
+            height: 60px;
+            line-height: 60px;
+        }
+
+        .panel-item .title {
+            height: 60px;
+            line-height: 60px;
+            display: inline-block;
+            width: 100px;
+        }
+
+        .panel-item input {
+            width: 100px;
+            text-align: center;
+        }
+
+        .panel-item .btn {
+            height: 40px;
+            width: 50px;
+            line-height: 40px;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            background-color: #eee;
+            border-radius: 5px;
+        }
+
+        .panel-item .btn:hover {
+            opacity: 0.5;
+        }
+
+        .frame {
+            height: 30px;
+            position: absolute;
+            bottom: 100px;
+            left: 50px;
+            right: 50px;
+            background-color: #ddd;
+        }
+
+        .frame-item {
+            position: absolute;
+            height: 100%;
+            width: 25px;
+            background: deepskyblue;
+            cursor: e-resize;
+        }
+
+        .frame-item.end {
+            background: red;
+        }
+
+        .frame-item.select {
+            background-color: orange !important;
+        }
+    </style>
+</head>
+<body>
+<div class="img-border">
+    <img src="img/1.jpg">
+</div>
+<div class="panel">
+    <form>
+        <div class="panel-item x value">
+            <div class="title">x:</div>
+            <input type="text" value="0"> %
+        </div>
+        <div class="panel-item y value">
+            <div class="title">y:</div>
+            <input type="text" value="0"> %
+        </div>
+        <div class="panel-item scale value">
+            <div class="title">scale:</div>
+            <input type="text" value="1">
+        </div>
+        <div class="panel-item rotate value">
+            <div class="title">rotate:</div>
+            <input type="text" value="0"> deg
+        </div>
+    </form>
+    <hr style="height:1px;border:none;border-top:1px solid #555555;"/>
+    <div class="panel-item">
+        <div class="title">持续时间：</div>
+        <input type="text" value="2" class="duration"> s
+    </div>
+    <div class="panel-item">
+        <div class="btn add">添加</div>
+    </div>
+    <div class="panel-item">
+        <div class="btn animate">动画</div>
+    </div>
+    <div class="panel-item">
+        <div class="btn copy">复制</div>
+    </div>
+</div>
+<div class="frame"></div>
+<script src="ZeroClipboard.min.js"></script>
+<script>
+    (function () {
+        var querySelector = document.querySelector.bind( document );
+        var querySelectorAll = document.querySelectorAll.bind( document );
+        var frame = querySelector( ".frame" );
+        var WIDTH = frame.offsetWidth;
+        var frames = [];
+        var curSelectIndex;
+        var img = querySelector( ".img-border img" );
+        var width = 25;
+        var form = querySelector( "form" );
+        var inputs = querySelectorAll( ".panel-item input" );
+        var duration = querySelector( ".duration" );
+        var animateBtn = querySelector( ".btn.animate" );
+        var copyBtn = querySelector( ".btn.copy" );
+
+        function loopArray( arr, func ) {
+            for ( var i = 0; i < arr.length; i++ ) {
+                func( arr[i], i );
+            }
+        }
+
+        function element( tag, arg, parent ) {
+            var el = document.createElement( tag );
+            for ( var key in arg ) {
+                switch ( key ) {
+                    case "classList":
+                        loopArray( arg.classList, function ( klass ) {
+                            el.classList.add( klass );
+                        } );
+                        break;
+                    default :
+                        el[key] = arg[key];
+                }
+            }
+            parent && parent.appendChild( el );
+            return el;
+        }
+
+        function addEventListener( el, type, listener, useCapture ) {
+            el.addEventListener( type, listener, useCapture );
+            return {
+                remove : function () {
+                    el.removeEventListener( type, listener, useCapture );
+                }
+            }
+        }
+
+        function onDragV( el, listener ) {
+            var prex;
+            addEventListener( el, "mousedown", function ( de ) {
+                listener.onTap && listener.onTap();
+                prex = de.pageX;
+                var mhandle = addEventListener( document, "mousemove", function ( me ) {
+                    listener.onDrag && listener.onDrag( me.pageX - prex );
+                    prex = me.pageX;
+                } );
+
+                var uhandle = addEventListener( document, "mouseup", function ( me ) {
+                    listener.onUp && listener.onUp();
+                    mhandle.remove();
+                    uhandle.remove();
+                } );
+
+            } );
+        }
+
+        function addOneFrame() {
+            var frameItem = element( "div", {
+                classList : ["frame-item"]
+            }, frame );
+            if ( frames.length == 0 ) {
+                frameItem.x = 0;
+                frameItem.style.left = frameItem.x + "px";
+            }
+            else {
+                var ww = Math.floor( (WIDTH - width - frames[frames.length - 1].x ) / 2 );
+                if ( ww < width ) {
+                    alert( "帧数太多了" );
+                    return;
+                }
+                else {
+                    frameItem.x = frames[frames.length - 1].x + width + ww;
+                    frameItem.style.left = frameItem.x + "px";
+                }
+            }
+            frameItem.index = frames.length;
+            frames.push( frameItem );
+
+            frameItem.data = [];
+
+            function flushData() {
+                // 刷新数据输入
+                form.reset();
+                loopArray( frameItem.data, function ( data, i ) {
+                    if ( data ) {
+                        inputs[i].value = data;
+                    }
+                } );
+                var x = inputs[0].value ? inputs[0].value << 0 : 0;
+                var y = inputs[1].value ? inputs[1].value << 0 : 0;
+                img.style.webkitTransform = "translate3d(" + x +
+                        "%," + y + "%,0) scale(" + (inputs[2].value || 1) + ") rotate("
+                        + (inputs[3].value || 0) + "deg)";
+            }
+
+            frameItem.onclick = function ( e ) {
+                if ( e.which == 1 ) {
+                    // 选中
+                    var cur = querySelector( ".frame-item.select" );
+                    cur && cur.classList.remove( "select" );
+                    frameItem.classList.add( "select" );
+                    flushData();
+                }
+                else if ( e.which == 2 ) {
+                    // 删除
+                    frame.removeChild( frameItem );
+                    if ( frames[frameItem.index - 1] ) {
+                        frameItem = frames[frameItem.index - 1];
+                        flushData();
+                    }
+                    else if ( frames[frameItem.index + 1] ) {
+                        frameItem = frames[frameItem.index + 1];
+                        flushData();
+                    }
+                    else {
+                        form.reset();
+                        img.style.webkitFilter = "";
+                    }
+                    frames = [];
+                    loopArray( querySelectorAll( ".frame-item" ), function ( item, i ) {
+                        item.index = i;
+                        frames.push( item );
+                    } )
+                }
+            };
+
+            var leftThreshold, rightThreshold;
+            onDragV( frameItem, {
+                onTap : function () {
+                    leftThreshold = frames[frameItem.index - 1];
+                    rightThreshold = frames[frameItem.index + 1];
+                    leftThreshold = leftThreshold ? leftThreshold.x + width : 0;
+                    rightThreshold = rightThreshold ? rightThreshold.x : WIDTH;
+                },
+                onDrag : function ( dx ) {
+                    var x = dx + frameItem.x;
+                    if ( x + width <= rightThreshold && x >= leftThreshold ) {
+                        frameItem.x = x;
+                        frameItem.style.left = x + "px";
+                    }
+                    if ( frameItem.index == frames.length - 1 && frameItem.x + width == WIDTH ) {
+                        frameItem.classList.add( "end" );
+                    }
+                    else if ( frameItem.index == frames.length - 1 && frameItem.x + width != WIDTH ) {
+                        frameItem.classList.remove( "end" );
+                    }
+                },
+                onUp : function () {
+                    if ( frameItem.index == frames.length - 1 && frameItem.x + width == WIDTH ) {
+                        frameItem.classList.add( "end" );
+                    }
+                    else if ( frameItem.index == frames.length - 1 && frameItem.x + width != WIDTH ) {
+                        frameItem.classList.remove( "end" );
+                    }
+                }
+            } );
+
+        }
+
+        querySelector( ".panel-item .add" ).onclick = function () {
+            addOneFrame();
+        };
+
+        // 处理编辑
+        loopArray( inputs, function ( input, i ) {
+            input.oninput = function () {
+                var cur = querySelector( ".frame-item.select" );
+                if ( cur ) {
+                    cur.data[i] = parseFloat( input.value );
+                    var x = inputs[0].value ? inputs[0].value << 0 : 0;
+                    var y = inputs[1].value ? inputs[1].value << 0 : 0;
+                    img.style.webkitTransform = "translate3d(" + x +
+                            "%," + y + "%,0) scale(" + (inputs[2].value || 1) + ") rotate("
+                            + (inputs[3].value || 0) + "deg)";
+                }
+            }
+        } );
+
+        img.addEventListener( "webkitAnimationEnd", function () {
+            img.style.webkitAnimation = "";
+        }, false );
+
+        var styleIndex = 0;
+        var styleDom = element( "style", {}, document.head );
+        animateBtn.onclick = function () {
+            var style = "@-webkit-keyframes cinema-animate" + styleIndex + "{";
+            loopArray( frames, function ( f, i ) {
+                var percent;
+                if ( i == frame.length - 1 ) {
+                    percent = (f.x + width) / WIDTH * 100 << 0;
+                }
+                else {
+                    percent = f.x / WIDTH * 100 << 0;
+                }
+                style += (percent + "%{-webkit-transform:translate3d(" + (f.data[0] || 0) +
+                "%," + (f.data[1] || 0) + "%,0) scale(" + (f.data[2] || 1) + ") rotate("
+                + (f.data[3] || 0) + "deg)}");
+            } );
+            style += "}";
+            styleDom.sheet.insertRule( style, 0 );
+            img.style.webkitAnimation = duration.value + "s " + "cinema-animate" + styleIndex + " both";
+            styleIndex++;
+        };
+
+        var client = new ZeroClipboard( copyBtn );
+        client.on( "copy", function ( event ) {
+            var arg = {};
+            loopArray( frames, function ( f, i ) {
+                var percent;
+                if ( i == frames.length - 1 ) {
+                    percent = (f.x + width) / WIDTH * 100 << 0;
+                }
+                else {
+                    percent = f.x / WIDTH * 100 << 0;
+                }
+                arg[percent] = "translate3d(" + (f.data[0] || 0) +
+                        "%," + (f.data[1] || 0) + "%,0) scale(" + (f.data[2] || 1) + ") rotate("
+                        + (f.data[3] || 0) + "deg)}";
+            } );
+            var clipboard = event.clipboardData;
+            clipboard.setData( "text/plain", JSON.stringify( arg ) );
+        } );
+    })();
+</script>
+</body>
+</html>
