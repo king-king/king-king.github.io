@@ -8,7 +8,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="screen-orientation" content="portrait">
     <meta name="browsermode" content="application">
-    <title>v2.0</title>
+    <title>v3.0</title>
     <style>
         body.disable {
             pointer-events: none;
@@ -69,9 +69,9 @@
 
         .panel-item .btn {
             display: inline-block;
-            height: 34px;
+            height: 40px;
             width: 50px;
-            line-height: 34px;
+            line-height: 40px;
             text-align: center;
             cursor: pointer;
             background-color: #eee;
@@ -362,6 +362,8 @@
                 style = style.replace( "rotateX" , ";rotateX" );
                 style = style.replace( "rotateY" , ";rotateY" );
                 style = style.replace( "rotateZ" , ";rotateZ" );
+                style = style.replace( "translate3d" , ";translate3d" );
+                style = style.replace( "perspective" , ";perspective" );
                 style = style.replace( "}" , "" );
                 style = replaceAll( style , "deg" , "" );
                 style = style.replace( "opacity" , ";opacity" );
