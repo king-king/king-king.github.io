@@ -97,9 +97,10 @@
 </head>
 <body>
 <input type="file" class="hide file" accept=".png,.jpg,.jpeg">
+
 <div class="img-border">
-    <img src="../img/2.jpg" class="down">
-    <img src="../img/2.jpg" class="up">
+    <img src="img/1.jpg" class="down">
+    <img src="img/1.jpg" class="up">
 </div>
 <div class="board">
     <div class="filter-item">
@@ -154,9 +155,9 @@
 <script src="ZeroClipboard.min.js"></script>
 <script>
     (function () {
-        function loopArray( arr, func ) {
+        function loopArray( arr , func ) {
             for ( var i = 0; i < arr.length; i++ ) {
-                func( arr[i], i );
+                func( arr[ i ] , i );
             }
         }
 
@@ -174,22 +175,22 @@
         };
 
         fileInput.onchange = function () {
-            raw.src = img.src = window.URL.createObjectURL( fileInput.files[0] );
+            raw.src = img.src = window.URL.createObjectURL( fileInput.files[ 0 ] );
         };
 
-        loopArray( document.querySelectorAll( ".filter" ), function ( range, i ) {
+        loopArray( document.querySelectorAll( ".filter" ) , function ( range , i ) {
             range.onmousemove = function () {
                 var vv = range.value;
-                if ( range.classList[0] == "blur" ) {
+                if ( range.classList[ 0 ] == "blur" ) {
                     vv = range.value + "px";
                 }
-                if ( range.classList[0] == "hue-rotate" ) {
+                if ( range.classList[ 0 ] == "hue-rotate" ) {
                     vv = range.value + "deg";
                 }
-                filterValue[i] = range.classList[0] + "(" + vv + ")";
-                spans[i].innerText = range.value;
+                filterValue[ i ] = range.classList[ 0 ] + "(" + vv + ")";
+                spans[ i ].innerText = range.value;
                 var value = "";
-                loopArray( filterValue, function ( v ) {
+                loopArray( filterValue , function ( v ) {
                     if ( v ) {
                         value += v;
                     }
@@ -202,34 +203,34 @@
 
 
         var client = new ZeroClipboard( document.querySelector( ".button.copy" ) );
-        client.on( "copy", function ( event ) {
+        client.on( "copy" , function ( event ) {
             var no = [
-                "grayscale(0)",
-                "sepia(0)",
-                "saturate(1)",
-                "hue-rotate(0deg)",
-                "invert(0)",
-                "brightness(1)",
-                "contrast(1)",
+                "grayscale(0)" ,
+                "sepia(0)" ,
+                "saturate(1)" ,
+                "hue-rotate(0deg)" ,
+                "invert(0)" ,
+                "brightness(1)" ,
+                "contrast(1)" ,
                 "blur(0px)"
             ];
             var style = document.querySelector( "img.up" ).style.webkitFilter;
             var i = 0;
-            while ( style && no[i] ) {
-                if ( style.indexOf( no[i] ) != -1 ) {
-                    style = style.replace( no[i], "" );
+            while ( style && no[ i ] ) {
+                if ( style.indexOf( no[ i ] ) != -1 ) {
+                    style = style.replace( no[ i ] , "" );
                 }
                 i++;
             }
             var clipboard = event.clipboardData;
 
-            clipboard.setData( "text/plain", "duration: " + (duration.value || 2) + "  delay:" + delay.value + "  filter:" + (style.trim() || "null") );
+            clipboard.setData( "text/plain" , "duration: " + (duration.value || 2) + "  delay:" + delay.value + "  filter:" + (style.trim() || "null") );
         } );
 
 
-        img.addEventListener( "webkitAnimationEnd", function () {
+        img.addEventListener( "webkitAnimationEnd" , function () {
             img.style.webkitAnimation = "";
-        }, false );
+        } , false );
 
         document.querySelector( ".button.animate" ).onclick = function () {
             img.style.webkitAnimation = ( duration.value || 2) + "s  " + "fade-out " + delay.value + "s linear both";
