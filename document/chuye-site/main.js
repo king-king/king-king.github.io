@@ -453,7 +453,7 @@
 
     function checkBroswer() {
         var canvas = document.querySelector( "canvas" );
-        if ( canvas.getContext( "2d" ) || document.querySelector ) {
+        if ( !canvas.getContext( "2d" ) || document.querySelector ) {
             makeDownloadPage();
             return true;
         }
