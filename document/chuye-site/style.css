@@ -88,8 +88,8 @@ body {
 
 .page0-img-border {
     position: absolute;
-    top: 22.3958333%;
-    left: 59.89583333333%;
+    top: 22.2958333%;
+    left: 60.09083333333%;
     height: 64.322916666%;
     width: 36.1979166%;
     overflow: hidden;
@@ -158,9 +158,24 @@ body {
 
 .page0-word {
     position: absolute;
-    top: 30.078125%;
     left: 0;
-    height: 21.223958%;
+    height: 5.3059895%;
+}
+
+.page0-word.a {
+    top: 30.078125%;
+}
+
+.page0-word.b {
+    top: 35.3841145%;
+}
+
+.page0-word.c {
+    top: 40.690104%;
+}
+
+.page0-word.d {
+    top: 45.9960935%;
 }
 
 .page0-qr {
@@ -168,6 +183,43 @@ body {
     top: 56.770833333333%;
     left: 2.604166%;
     height: 20.3125%;
+    width: 17.96875%;
+}
+
+.page0-qr .page0-qr-img {
+    position: absolute;
+    width: 100%;
+}
+
+.page0-qr-mask {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 87.85942%;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid white;
+    border-radius: 4px;
+    display: none;
+}
+
+.onover .page0-qr-mask {
+    display: block;
+}
+
+.page0-ios-icon, .page0-android-icon {
+    position: absolute;
+    left: 37.3188%;
+    height: 25.4545%;
+    cursor: pointer;
+}
+
+.page0-ios-icon {
+    top: 19.27%;
+}
+
+.page0-android-icon {
+    bottom: 16.9329%;
 }
 
 .page0-btn {
@@ -219,9 +271,32 @@ body {
 }
 
 .page1-word {
-    top: 44.66145%;
     right: 66.796875%;
-    height: 25.6510416%;
+    height: 4.2751736%;
+}
+
+.page1-word.a {
+    top: 44.66145%;
+}
+
+.page1-word.b {
+    top: 48.9366236%;
+}
+
+.page1-word.c {
+    top: 53.2117972%;
+}
+
+.page1-word.d {
+    top: 57.4869708%;
+}
+
+.page1-word.e {
+    top: 61.7621444%;
+}
+
+.page1-word.f {
+    top: 66.037318%;
 }
 
 .yellow-phone {
@@ -231,9 +306,9 @@ body {
 }
 
 .content-border {
-    width: 30.9895833%;
+    width: 31.0995833%;
     top: 21.875%;
-    left: 46.3541666%;
+    left: 46.2011666%;
     height: 54.947916%;
 }
 
@@ -325,9 +400,24 @@ body {
 }
 
 .page2-word {
-    top: 45.96354%;
     left: 7.94271%;
-    height: 16.40625%;
+    height: 4.1015625%;
+}
+
+.page2-word.a {
+    top: 45.96354%;
+}
+
+.page2-word.b {
+    top: 50.0651025%;
+}
+
+.page2-word.c {
+    top: 54.166665%;
+}
+
+.page2-word.d {
+    top: 58.2682275%;
 }
 
 .page2-cat {
@@ -372,9 +462,20 @@ body {
 }
 
 .page3-word {
-    top: 50.78125%;
     left: 1.43229%;
-    height: 11.71875%;
+    height: 3.90625%;
+}
+
+.page3-word.a {
+    top: 50.78125%;
+}
+
+.page3-word.b {
+    top: 54.6875%;
+}
+
+.page3-word.c {
+    top: 58.59375%;
 }
 
 .page3-canvas {
@@ -388,11 +489,39 @@ body {
 }
 
 .page-3 .content-img {
-    opacity: 0;
+    display: none;
 }
 
 .page-3 .content-img.select {
-    opacity: 1;
+    display: block;
+}
+
+.page3-play-btn {
+    cursor: pointer;
+    height: 16.98113%;
+    position: absolute;
+    top: 36.79245%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+    display: none;
+}
+
+.page3-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    overflow: hidden;
+    background: #000;
+    border: 0;
+}
+
+.page3-iframe.play {
+    z-index: 100;
+    display: block;
 }
 
 .page4-title {
@@ -402,9 +531,16 @@ body {
 }
 
 .page4-word {
-    top: 50.52083%;
     left: 2.08333%;
-    height: 6.90104%;
+    height: 3.45052%;
+}
+
+.page4-word.a {
+    top: 50.52083%;
+}
+
+.page4-word.b {
+    top: 53.97135%;
 }
 
 .page4-circles {
@@ -436,9 +572,16 @@ body {
 }
 
 .page5-word {
-    top: 51.43229%;
     right: 66.79688%;
-    height: 7.03125%;
+    height: 3.515625%;
+}
+
+.page5-word.a {
+    top: 51.43229%;
+}
+
+.page5-word.b {
+    top: 54.947915%;
 }
 
 .page5-tag0 {
@@ -553,7 +696,7 @@ body {
     width: 6px;
     height: 6px;
     border-radius: 6px;
-    background-color: white;
+    background-color: transparent;
     border: 2px solid #e8e5df;
 }
 
@@ -579,28 +722,52 @@ body {
     animation: 2s left-to-right ease-in-out both;
 }
 
-.show .page-word {
-    animation: 2s left-to-right 0.6s ease-in-out both;
+.show .page0-word.a {
+    animation: 2s down-shade 0.5s ease-in-out both;
 }
 
-.show .top-logo {
-    animation: 2s left-to-right 0.3s ease-in-out both;
+.show .page0-word.b {
+    animation: 2s down-shade 1s ease-in-out both;
 }
 
-.show .home-page {
-    animation: 2s right-to-left 0.3s ease-in-out both;
+.show .page0-word.c {
+    animation: 2s down-shade 1.5s ease-in-out both;
 }
 
-.show .communite {
-    animation: 2s right-to-left 0.5s ease-in-out both;
+.show .page0-word.d {
+    animation: 2s down-shade 2s ease-in-out both;
 }
 
 .show .page0-qr {
-    animation: 1.5s left-to-right 1.2s ease-in-out both;
+    animation: 1.5s down-shade 3.4s ease-in-out both;
 }
 
 .show .page0-btn {
-    animation: 1.5s left-to-right 1.8s ease-in-out both;
+    animation: 1.5s down-shade 4.2s ease-in-out both;
+}
+
+.show .page1-word.a {
+    animation: 2s down-shade ease-in-out both;
+}
+
+.show .page1-word.b {
+    animation: 2s down-shade 0.5s ease-in-out both;
+}
+
+.show .page1-word.c {
+    animation: 2s down-shade 1s ease-in-out both;
+}
+
+.show .page1-word.d {
+    animation: 2s down-shade 1.5s ease-in-out both;
+}
+
+.show .page1-word.e {
+    animation: 2s down-shade 2s ease-in-out both;
+}
+
+.show .page1-word.f {
+    animation: 2s down-shade 2.5s ease-in-out both;
 }
 
 .show .page1-0 {
@@ -639,6 +806,22 @@ body {
     animation: 1s shade-in ease-in-out both;
 }
 
+.show .page2-word.a {
+    animation: 2s down-shade 0.5s ease-in-out both;
+}
+
+.show .page2-word.b {
+    animation: 2s down-shade 1s ease-in-out both;
+}
+
+.show .page2-word.c {
+    animation: 2s down-shade 2s ease-in-out both;
+}
+
+.show .page2-word.d {
+    animation: 2s down-shade 2.5s ease-in-out both;
+}
+
 .show .page2-tag0, .show .page5-tag0 {
     animation: 1s right-to-left ease-in-out both;
 }
@@ -665,6 +848,42 @@ body {
 
 .show .page2-cat {
     animation: 0.5s scale 0.4s cubic-bezier(.17, .67, .72, 1.39) both;
+}
+
+.show .page3-word.a {
+    animation: 2s down-shade 0.5s ease-in-out both;
+}
+
+.show .page3-word.b {
+    animation: 2s down-shade 1.5s ease-in-out both;
+}
+
+.show .page3-word.c {
+    animation: 2s down-shade 2s ease-in-out both;
+}
+
+.show .page4-word.a {
+    animation: 2s down-shade 0.5s ease-in-out both;
+}
+
+.show .page4-word.b {
+    animation: 2s down-shade 1s ease-in-out both;
+}
+
+.show .page5-word.a {
+    animation: 2s down-shade 0.5s ease-in-out both;
+}
+
+.show .page5-word.b {
+    animation: 2s down-shade 1s ease-in-out both;
+}
+
+.page3-canvas.shake {
+    animation: 0.3s shake ease-in-out both;
+}
+
+.show .page3-play-btn {
+    animation: 3s flip-over ease-in-out both infinite;
 }
 
 @keyframes left-to-right {
@@ -718,6 +937,19 @@ body {
     }
 }
 
+@keyframes down-shade {
+    0% {
+        -webkit-transform: translate3d(0, -50%, 0);
+        transform: translate3d(0, -50%, 0);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
 @keyframes fly {
     0% {
         transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
@@ -756,3 +988,158 @@ body {
         transform: scale3d(1, 1, 1) rotateZ(180deg);
     }
 }
+
+@keyframes shake {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    20% {
+        transform: translate3d(4px, 2px, 0);
+    }
+    30% {
+        transform: translate3d(-4px, -2px, 0);
+    }
+    40% {
+        transform: translate3d(3px, -2px, 0);
+    }
+    60% {
+        transform: translate3d(0px, 2px, 0);
+    }
+    70% {
+        transform: translate3d(-5px, -4px, 0);
+    }
+    90% {
+        transform: translate3d(5px, 4px, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes flip-over {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/*如果浏览器太旧*/
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body.not-support {
+    background: url(img/browser_bg.jpg) repeat-x left top;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: "Microsoft YaHei", 微软雅黑, "STHei", 华文黑体, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.not-support div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+}
+
+.not-support h1, h2, h3, h4, h5, h6, b {
+    font-size: 100%;
+    font-weight: 500;
+}
+
+.not-support ol, ul {
+    list-style: none;
+}
+
+.not-support a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.not-support .browser-update {
+    width: 718px;
+    height: 496px;
+    clear: both;
+    background: url(img/browser_bg_wrapper.png) no-repeat left top;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -359px;
+    margin-top: -248px;
+}
+
+.not-support .browser-update h1, .browser-update h2, .browser-update h3 {
+    text-align: center;
+}
+
+.not-support .browser-update h1 {
+    padding: 67px 0 0 0;
+    font-size: 30px;
+    line-height: 30px;
+    color: #333;
+    letter-spacing: 1px;
+}
+
+.not-support .browser-update h2 {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #999;
+    padding: 32px 55px 15px;
+    letter-spacing: 0.1px;
+}
+
+.not-support .browser-update h3 {
+    font-size: 16px;
+    line-height: 16px;
+    color: #666;
+    padding: 20px 0 40px 0;
+
+}
+
+.not-support .browser-update ul {
+    clear: both;
+}
+
+.not-support .browser-update li {
+    float: left;
+    background: url(img/browser_icon.png) no-repeat left top;
+    width: 140px;
+    height: 170px;
+    position: relative;
+    text-align: center;
+    *display: inline;
+    *zoom: 1;
+}
+
+.not-support .browser-update ul a {
+    display: block;
+    width: 100%;
+    padding: 135px 0 0 0;
+}
+
+.not-support .browser-update h4 {
+    color: #999;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.not-support .browser-update .chrome {
+    background-position: 9px 0;
+    margin: 0 0 0 89px;
+}
+
+.not-support .browser-update .firefox {
+    background-position: -140px 0;
+    margin: 0 60px;
+}
+
+.not-support .browser-update .ie {
+    background-position: -292px 0;
+}
+

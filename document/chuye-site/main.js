@@ -14,6 +14,7 @@
     var isScrolling = false;
     var yellowPhones = querySelectorAll( ".section .yellow-phone" );
     var tempWrapper = querySelector( ".temp-wrapper" );
+    var isAppleWebKit = navigator.userAgent.indexOf( "AppleWebKit" ) != -1;
 
     function loopArray( arr , func ) {
         for ( var i = 0; i < arr.length; i++ ) {
@@ -48,7 +49,6 @@
         tempWrapper.style.width = tempWrapper.style.height = cubeHeight + "px";
         tempWrapper.style.marginLeft = tempWrapper.style.marginTop = -cubeHeight / 2 + "px"
     }
-
 
     function wheelScroll( direction ) {
         if ( isScrolling ) {
@@ -110,16 +110,22 @@
 
     function animate( duration , frame , onEnd ) {
         var s = (new Date()).getTime();
-        setTimeout( function () {
+        var timeID;
+        timeID = setTimeout( function () {
             var cur = (new Date()).getTime();
             if ( cur - s < duration ) {
                 frame( (cur - s ) / duration );
-                setTimeout( arguments.callee , 20 );
+                timeID = setTimeout( arguments.callee , 20 );
             } else {
                 frame( 1 );
                 onEnd();
             }
         } , 20 );
+        return {
+            remove : function () {
+                clearTimeout( timeID );
+            }
+        }
     }
 
     function Timer( duration , func ) {
@@ -152,8 +158,14 @@
     function initPage0() {
         var curIndex = 0;
         var slideWrapper = querySelector( ".page0-img-border-wrapper" );
-        var slideBorder = querySelector( ".page0-img-border" );
         var circles = querySelectorAll( ".page0-circle" );
+        var qrBorder = querySelector( ".page0-qr" );
+        qrBorder.onmouseover = function () {
+            qrBorder.classList.add( "onover" );
+        };
+        qrBorder.onmouseout = function () {
+            qrBorder.classList.remove( "onover" );
+        };
 
         loopArray( querySelectorAll( ".page0-img-border-wrapper .item" ) , function ( item , i ) {
             item.style.left = 25 * i + "%";
@@ -241,12 +253,14 @@
     function initPage3() {
         var contentImages = querySelectorAll( ".page-3 .content-img" );
         var canvas = querySelector( ".page3-canvas" );
-        var yellowPhone = querySelector( ".page-3 .yellow-phone" );
+        var playBtn = querySelector( ".page3-play-btn" );
+        var page3Border = querySelector( ".page-3 .content-border" );
         var gc = canvas.getContext( "2d" );
         var clock = new Image() , clockPointer = new Image();
         var da = Math.PI / 180;
         var da0 = -Math.PI / 2;
-        var slideHandler;
+        var rotateHandler;
+        var page3Iframe = querySelector( ".page3-iframe" );
 
         function frame( angle ) {
             gc.clearRect( 0 , 0 , 86 , 86 );
@@ -259,10 +273,10 @@
             gc.lineTo( 43 , 43 );
             gc.closePath();
             gc.fill();
-            gc.drawImage( clock , 0 , 0 );
+            gc.drawImage( clock , 0 , 0 , 86 , 86 );
             gc.translate( 43 , 43 );
             gc.rotate( da * angle );
-            gc.drawImage( clockPointer , -2 , -26 );
+            gc.drawImage( clockPointer , -2 , -26 , 4 , 52 );
             gc.restore();
         }
 
@@ -277,51 +291,60 @@
             frame( 0 );
         } );
         // 图片要能够轮播
-        var curIndex = 0;
         var angle = 0;
-        var dangle = 120;
+        var dangle = 360;
 
-        function slide() {
-            contentImages[ curIndex ].classList.remove( "select" );
-            curIndex = (curIndex + 1) % 3;
-            contentImages[ curIndex ].classList.add( "select" );
-            animate( 400 , function ( percent ) {
-                frame( angle + dangle * percent * percent );
-            } , function () {
-                angle = curIndex == 0 ? 0 : angle + dangle;
-                frame( angle );
-            } );
-        }
-
-        var curindex = 0;
         var isOver;
 
         function beginSlide() {
             isOver = false;
-            curindex = 0;
-            slideHandler = Timer( 4000 , function () {
-                slide();
-                curindex++;
-                console.log( curindex );
-                if ( curindex == 3 ) {
-                    slideHandler.remove();
-                    isOver = true;
+            loopArray( contentImages , function ( img ) {
+                img.classList.remove( "select" );
+            } );
+            contentImages[ 0 ].classList.add( "select" );
+            frame( 0 );
+            rotateHandler = animate( 4000 , function ( percent ) {
+                frame( angle + dangle * percent );
+                if ( percent > 0.5 ) {
+                    contentImages[ 0 ].classList.remove( "select" );
+                    contentImages[ 1 ].classList.add( "select" );
                 }
+            } , function () {
+                isOver = true;
+                isAppleWebKit && (playBtn.style.display = "block");
+                canvas.classList.add( "shake" );
+                contentImages[ 1 ].classList.remove( "select" );
+                contentImages[ 2 ].classList.add( "select" );
             } );
         }
 
         canvas.onclick = function () {
             if ( isOver ) {
+                page3Iframe.src = "";
+                page3Iframe.classList.remove( "play" );
+                playBtn.style.display = "none";
                 beginSlide();
             }
         };
 
+        playBtn.onclick = function () {
+            if ( isOver ) {
+                page3Iframe.width = page3Border.offsetWidth;
+                page3Iframe.height = page3Border.offsetHeight;
+                page3Iframe.src = "http://192.168.0.229:9494/debug/work.html?id=18687900&mode=mv-19";
+                page3Iframe.classList.add( "play" );
+            }
+        };
+
         sections[ 3 ].stop = function () {
-            slideHandler.remove();
+            page3Iframe.src = "";
+            page3Iframe.classList.remove( "play" );
+            rotateHandler.remove();
         };
         sections[ 3 ].play = function () {
-            slideHandler && slideHandler.remove();
-            beginSlide();
+            rotateHandler && rotateHandler.remove();
+            playBtn.style.display = "none";
+            rotateHandler = setTimeout( beginSlide , 1000 );
         };
 
     }
@@ -358,6 +381,7 @@
 
         sections[ 4 ].play = function () {
             if ( !contentBorder.classList.contains( "tap" ) ) {
+                flyHandler && flyHandler.remove();
                 flyHandler = Timer( 5000 , fly );
             }
         };
@@ -397,7 +421,6 @@
             page5Tags[ curIndex ].src = srcs[ curIndex ].slice( 0 , srcs[ curIndex ].length - 5 ) + "0.png";
         }
 
-        //switchHandler = Timer( 5000 , switchImg );
         loopArray( page5Tags , function ( tag , i ) {
             var isbad = true;
             tag.onmouseover = function () {
@@ -428,7 +451,35 @@
 
     }
 
+    function checkBroswer() {
+        var canvas = document.querySelector( "canvas" );
+        if ( canvas.getContext( "2d" ) || document.querySelector ) {
+            makeDownloadPage();
+            return true;
+        }
+        function makeDownloadPage() {
+            document.body.className = "not-support";
+            document.body.innerHTML = "<div class='browser-update' ><h1>请升级您的浏览器</h1>" +
+                "<h2>尊敬的用户，您现在使用的浏览器版本过低，请升级后继续使用初页的服务。</h2>" +
+                "<h3>您可以选择：</h3>" +
+                "<ul>" +
+                "<li class='chrome'><a href='http://www.google.cn/intl/zh-CN/chrome/browser/' target='_blank'><h4>Google" +
+                "Chrome</h4></a></li>" +
+                "<li class='firefox'><a href='http://www.mozilla.org/zh-CN/firefox/new/' target='_blank'><h4>Mozilla Firefox</h4>" +
+                "</a></li>" +
+                "<li class='ie'><a href='http://www.microsoft.com/china/windows/IE/upgrade/index.aspx' target='_blank'><h4>" +
+                "Internet Explorer 9+</h4></a></li>" +
+                "</ul>" +
+                "</div>";
+        }
+
+        return false;
+    }
+
     function init() {
+        if ( checkBroswer() ) {
+            return;
+        }
         resize();
         // loading
         var loadingTips = querySelector( ".loading-tips" );
