@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>气泡</title>
+    <style>
+        body {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: black;
+            margin: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            opacity: 0.6;
+            /*mix-blend-mode: screen;*/
+            /*background: #ff0000;*/
+        }
+
+        @keyframes bubble-up0 {
+            0% {
+                opacity: 0;
+                transform: scale3d(0, 0, 0) translate3d(0, 0, 0);
+            }
+            12.5% {
+                opacity: 0.5;
+                transform: scale3d(0.5, 0.5, 0.5) translate3d(0, -100%, 0);
+            }
+            25% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1) translate3d(0, -100%, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1) translate3d(0, -1000%, 0);
+            }
+        }
+
+        @keyframes bubble-up1 {
+            0% {
+                opacity: 0;
+                transform: scale3d(0, 0, 0) translate3d(0, -150%, 0);
+            }
+            12.5% {
+                opacity: 0.5;
+                transform: scale3d(0.5, 0.5, 0.5) translate3d(0, -50%, 0);
+            }
+            25% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1) translate3d(0, -50%, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1) translate3d(0, -1000%, 0);
+            }
+        }
+
+        @keyframes shade-out {
+            0% {
+                opacity: 1;
+                transform: translate3d(0, -1000%, 0);
+            }
+            100% {
+                opacity: 0;
+                transform: translate3d(0, -1000%, 0);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<img src="1.jpg">
+<script>
+    (function () {
+        var body = document.body;
+        var img0 = new Image();
+        var img1 = new Image();
+        img0.src = "bubble0-boom.png";
+        img1.src = "bubble1-boom.png";
+
+        function bubble(index) {
+            var b = document.createElement("img");
+            b.index = 0;
+            var imgIndex = index % 2;
+            b.src = "bubble" + imgIndex + ".png";
+            b.classList.add("bubble");
+            var ratio = body.offsetHeight > 568 ? 300 : 350;
+            var width = (Math.random() * 5 + 10) / ratio * body.offsetHeight << 0;
+            b.style.height = width + "px";
+            b.style.top = (Math.random() * 0.7 + 0.3) * 100 + "%";
+            b.style.left = Math.random() * (body.offsetWidth - width ) + "px";
+            body.appendChild(b);
+            b.style.webkitAnimation = "bubble-up0 6s " + index / 5 + "s linear both";
+            b.addEventListener("animationend", function () {
+                if (b.style.webkitAnimation.indexOf("shade-out") != -1) {
+                    // 炸裂完毕再做下面的动画
+                    b.index = 1 - b.index;
+                    b.src = "bubble" + imgIndex + ".png";
+                    b.style.webkitAnimation = "bubble-up" + b.index + " 6s " + index / 5 + "s linear both";
+                } else {
+                    // 运行到顶端然后做炸裂动画
+                    b.src = "bubble" + imgIndex + "-boom.png";
+                    setTimeout(function () {
+                        b.style.webkitAnimation = "shade-out 0.5s linear both";
+                    }, 300);
+                }
+            });
+            return b;
+        }
+
+        for (var n = 0; n < 30; n++) {
+            bubble(n);
+        }
+
+    })()
+</script>
+</body>
+</html>
