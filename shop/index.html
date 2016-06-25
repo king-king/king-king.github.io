@@ -109,12 +109,13 @@
             transform: translate3d(-50%, -50%, 0);
         }
 
-        .loading-image{
+        .loading-image {
             width: 150px;
             height: 151px;
             position: absolute;
         }
-         .loading-bg {
+
+        .loading-bg {
             width: 150px;
             height: 150px;
             position: absolute;
@@ -219,13 +220,13 @@
 <script>
     (function () {
 
-        var loadimg=$("img",{
-            classList:"loading-image",
-            src:"loading.png"
-        },document.querySelector(".loading-wrapper"));
+        var loadimg = $("img", {
+            classList: "loading-image",
+            src: "loading.png"
+        }, document.querySelector(".loading-wrapper"));
 
-        loadimg.onload= function () {
-            document.querySelector(".loading-bg").style.animation="7s up linear both";
+        loadimg.onload = function () {
+            document.querySelector(".loading-bg").style.animation = "7s up linear both";
         };
 
         var leftList = document.querySelector(".left-list");
@@ -278,7 +279,7 @@
                     }
                 }, header);
                 onTap(back, function () {
-                    location.hash="";
+                    location.hash = "";
                     css(productPage, {
                         animation: "0.3s slide-out ease-in-out both"
                     });
@@ -289,7 +290,7 @@
                 var imgWall = $("div", {classList: "img-wall"}, productPage);
                 var fullText = $("div", {
                     classList: "full-text",
-                    innerHTML: d.text+"<br><br>欢迎关注微信号:<span style='color: dodgerblue;'>米果©铺子</span>"
+                    innerHTML: d.text + "<br><br>欢迎关注微信号:<span style='color: dodgerblue;'>米果©铺子</span>"
                 }, productPage);
                 loopArray(d.imgs, function (src) {
                     var image = $("div", {
