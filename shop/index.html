@@ -42,7 +42,7 @@
             line-height: 40px;
             text-align: center;
             box-shadow: 1px -2px 7px #000;
-            padding: 6px 0;
+            color: #9c9c9c;
             box-sizing: border-box;
         }
 
@@ -199,7 +199,7 @@
     </style>
 </head>
 <body>
-<header></header>
+<header>米果©铺子</header>
 <div style="display: none">
     <img src="logo.JPG">
 </div>
@@ -268,6 +268,7 @@
                     }
                 }, header);
                 onTap(back, function () {
+                    location.hash="";
                     css(productPage, {
                         animation: "0.3s slide-out ease-in-out both"
                     });
