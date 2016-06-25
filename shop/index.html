@@ -122,12 +122,13 @@
 
         .loading-bg {
             background-color: rgba(176, 224, 230, 255);
-            animation: 7s up linear both;
+            /*animation: 7s up linear both;*/
+            transform: translate3d(0, 151px, 0);
         }
 
         @keyframes up {
             0% {
-                transform: translate3d(0, 100%, 0);
+                transform: translate3d(0, 151px, 0);
             }
             100% {
                 transform: translate3d(0, 0, 0);
@@ -206,7 +207,7 @@
 <div class="loading-page">
     <div class="loading-wrapper">
         <div class="loading-bg"></div>
-        <img src="loading.png" class="loading-image">
+
     </div>
 </div>
 <div class="list-content">
@@ -217,6 +218,15 @@
 <script src="tool.js"></script>
 <script>
     (function () {
+
+        var loadimg=$("img",{
+            classList:"loading-image",
+            src:"loading.png"
+        },document.querySelector(".loading-wrapper"));
+
+        loadimg.onload= function () {
+            document.querySelector(".loading-bg").style.animation="7s up linear both";
+        };
 
         var leftList = document.querySelector(".left-list");
         var rightList = document.querySelector(".right-list");
