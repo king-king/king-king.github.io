@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <title>米果©铺子🇺🇸</title>
+
     <style>
         * {
             padding: 0;
@@ -107,7 +109,12 @@
             transform: translate3d(-50%, -50%, 0);
         }
 
-        .loading-image, .loading-bg {
+        .loading-image{
+            width: 150px;
+            height: 151px;
+            position: absolute;
+        }
+         .loading-bg {
             width: 150px;
             height: 150px;
             position: absolute;
@@ -193,6 +200,9 @@
 </head>
 <body>
 <header></header>
+<div style="display: none">
+    <img src="logo.JPG">
+</div>
 <div class="loading-page">
     <div class="loading-wrapper">
         <div class="loading-bg"></div>
@@ -266,7 +276,10 @@
                     }, 300);
                 });
                 var imgWall = $("div", {classList: "img-wall"}, productPage);
-                var fullText = $("div", {classList: "full-text", textContent: d.text}, productPage);
+                var fullText = $("div", {
+                    classList: "full-text",
+                    innerHTML: d.text+"<br><br>欢迎关注微信号:<span style='color: dodgerblue;'>米果©铺子</span>"
+                }, productPage);
                 loopArray(d.imgs, function (src) {
                     var image = $("div", {
                         classList: "img-item",
@@ -301,6 +314,7 @@
                         })
                     });
                 });
+
             });
 
 
