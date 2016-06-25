@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            outline: none;
+            border: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-text-size-adjust: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -moz-user-select: none;
+        }
+
+        html, body {
+            margin: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #D0D0CF;
+            overflow: hidden;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        header {
+            height: 40px;
+            background: #fff;
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            right: 0;
+            line-height: 40px;
+            text-align: center;
+            box-shadow: 1px -2px 7px #000;
+            padding: 6px 0;
+            box-sizing: border-box;
+        }
+
+        .list-content {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .left-list, .right-list {
+            float: left;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .left-list {
+            padding: 10px 5px 10px 10px;
+        }
+
+        .right-list {
+            padding: 10px 10px 10px 5px;
+        }
+
+        .list-item {
+            margin-bottom: 10px;
+        }
+
+        .list-item img {
+            width: 100%;
+            display: block;
+        }
+
+        .list-item .text {
+            color: rgba(0, 0, 0, .6);
+            line-height: 18px;
+            background: #F5F5F5;
+            margin: 0;
+            padding: 14px 10px;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        .loading-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            background: white;
+        }
+
+        .loading-wrapper {
+            overflow: hidden;
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+        }
+
+        .loading-image, .loading-bg {
+            width: 150px;
+            height: 150px;
+            position: absolute;
+        }
+
+        .loading-bg {
+            background-color: rgba(176, 224, 230, 255);
+            animation: 7s up linear both;
+        }
+
+        @keyframes up {
+            0% {
+                transform: translate3d(0, 100%, 0);
+            }
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .product-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: #F5F5F5;
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 100;
+        }
+
+        .img-item {
+            display: inline-block;
+            box-sizing: border-box;
+            overflow: hidden;
+            margin: 10px 0 0 10px;
+        }
+
+        .img-wall {
+            font-size: 0;
+            background: #fff;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        .full-text {
+            color: rgba(0, 0, 0, .6);
+            padding: 10px;
+            font-size: 14px;
+            word-break: break-all;
+            line-height: 20px;
+        }
+
+        @keyframes slide-in {
+            0% {
+                transform: translate3d(100%, 0, 0);
+            }
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes slide-out {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            100% {
+                transform: translate3d(100%, 0, 0);
+            }
+        }
+
+        .mask {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 200;
+        }
+
+    </style>
+</head>
+<body>
+<header></header>
+<div class="loading-page">
+    <div class="loading-wrapper">
+        <div class="loading-bg"></div>
+        <img src="loading.png" class="loading-image">
+    </div>
+</div>
+<div class="list-content">
+    <div class="left-list"></div>
+    <div class="right-list"></div>
+</div>
+<script src="data.js"></script>
+<script src="tool.js"></script>
+<script>
+    (function () {
+
+        var leftList = document.querySelector(".left-list");
+        var rightList = document.querySelector(".right-list");
+        var loadingPage = document.querySelector(".loading-page");
+        setTimeout(function () {
+            document.body.removeChild(loadingPage);
+        }, 7500);
+
+        loopArray(data, function (d, i) {
+            var listItem = document.createElement("div");
+            listItem.id = d.id;
+            listItem.classList.add("list-item");
+            var img = new Image();
+            img.src = d.cover;
+            listItem.appendChild(img);
+            var text = document.createElement("div");
+            text.classList.add("text");
+            var t = d.text;
+            if (d.text.length > 30) {
+                t = d.text.slice(0, 30) + "...";
+            }
+            text.textContent = t;
+            listItem.appendChild(text);
+
+            if (leftList.offsetHeight <= rightList.offsetHeight) {
+                leftList.appendChild(listItem);
+            } else {
+                rightList.appendChild(listItem);
+            }
+
+            // 添加事件
+            onTap(listItem, function () {
+                location.hash = "id=" + d.id;
+                var w = (document.body.offsetWidth / 3 - 10);
+                var productPage = $("div", {
+                    classList: "product-page",
+                    css: {
+                        animation: "0.3s slide-in ease-in-out both"
+                    }
+                }, document.body);
+                var header = $("header", {}, productPage);
+                var back = $("div", {
+                    css: {
+                        width: "20px",
+                        height: "20px",
+                        "margin": "4px 10px",
+                        background: "url(back.png) center center",
+                        "background-size": "cover"
+                    }
+                }, header);
+                onTap(back, function () {
+                    css(productPage, {
+                        animation: "0.3s slide-out ease-in-out both"
+                    });
+                    setTimeout(function () {
+                        productPage.parentNode.removeChild(productPage);
+                    }, 300);
+                });
+                var imgWall = $("div", {classList: "img-wall"}, productPage);
+                var fullText = $("div", {classList: "full-text", textContent: d.text}, productPage);
+                loopArray(d.imgs, function (src) {
+                    var image = $("div", {
+                        classList: "img-item",
+                        css: {
+                            "background-image": "url(" + src + ")",
+                            "background-position": "center center",
+                            "background-size": "cover",
+                            height: w + "px",
+                            width: w + "px"
+                        }
+                    }, imgWall);
+                    onTap(image, function () {
+                        var mask = $("div", {
+                            classList: "mask",
+                            children: [
+                                $("div", {
+                                    css: {
+                                        position: "absolute",
+                                        left: 0,
+                                        top: 0,
+                                        right: 0,
+                                        bottom: 0,
+                                        "background": "url(" + src + ") center center",
+                                        "background-size": "contain",
+                                        "background-repeat": "no-repeat"
+                                    }
+                                })
+                            ]
+                        }, document.body);
+                        onTap(mask, function () {
+                            mask.parentNode.removeChild(mask);
+                        })
+                    });
+                });
+            });
+
+
+        });
+
+
+    })();
+</script>
+</body>
+</html>
