@@ -3,6 +3,17 @@
  */
 var data = [
     {
+        id: 14,
+        cover: "image/s1/IMG_3162.JPG",
+        text: "阿迪达斯 NMD-Triple White 限时特价!!1499包邮,绝美价格再难寻,详情私信米果。",
+        imgs: [
+            "image/s1/IMG_3161.JPG",
+            "image/s1/IMG_3162.JPG",
+            "image/s1/IMG_3163.JPG",
+            "image/s1/IMG_3164.JPG"
+        ]
+    },
+    {
         id: 1,
         cover: "image/s1/IMG_3086.JPG",
         text: "有朋友问到了,于是发一波吧,KENZO平底鞋,身边很多妹子在穿,七折!!这么给力的折扣不常有,想要的抓紧按图来问尺码。",
