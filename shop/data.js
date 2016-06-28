@@ -3,14 +3,25 @@
  */
 var data = [
     {
+        id: 15,
+        cover: "image/s1/IMG_3166.JPG",
+        text: "乔6魔力红 36码现货特价!!1599包邮哦,亲们抓紧啊。",
+        imgs: [
+            "image/s15/IMG_3165.JPG",
+            "image/s15/IMG_3166.JPG",
+            "image/s15/IMG_3167.JPG",
+            "image/s15/IMG_3168.JPG"
+        ]
+    },
+    {
         id: 14,
         cover: "image/s1/IMG_3162.JPG",
         text: "阿迪达斯 NMD-Triple White 限时特价!!1499包邮,绝美价格再难寻,详情私信米果。",
         imgs: [
-            "image/s1/IMG_3161.JPG",
-            "image/s1/IMG_3162.JPG",
-            "image/s1/IMG_3163.JPG",
-            "image/s1/IMG_3164.JPG"
+            "image/s14/IMG_3161.JPG",
+            "image/s14/IMG_3162.JPG",
+            "image/s14/IMG_3163.JPG",
+            "image/s14/IMG_3164.JPG"
         ]
     },
     {
