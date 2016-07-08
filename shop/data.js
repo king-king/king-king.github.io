@@ -4,14 +4,14 @@
 var data = [
     {
         id: 22,
-        cover: "image/s21/IMG_3216.JPG",
+        cover: "image/s22/IMG_3216.JPG",
         text: "火遍大街小巷的Coach Swagger,很特别的拼皮款,限时六折!!",
         imgs: [
-            "image/s21/IMG_3216.JPG",
-            "image/s21/IMG_3217.JPG",
-            "image/s21/IMG_3218.JPG",
-            "image/s21/IMG_3219.JPG",
-            "image/s21/IMG_3220.JPG"
+            "image/s22/IMG_3216.JPG",
+            "image/s22/IMG_3217.JPG",
+            "image/s22/IMG_3218.JPG",
+            "image/s22/IMG_3219.JPG",
+            "image/s22/IMG_3220.JPG"
         ]
     },
     {
