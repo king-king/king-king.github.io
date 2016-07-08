@@ -3,6 +3,19 @@
  */
 var data = [
     {
+        id: 23,
+        cover: "image/s23/IMG_3221.JPG",
+        text: "AJ 12 Tiffany 蓝黑 GS 38 美国直邮只需10天,Yo!小伙伴们还不快把蒂芙尼蓝穿在脚上",
+        imgs: [
+            "image/s23/IMG_3221.JPG",
+            "image/s23/IMG_3222.JPG",
+            "image/s23/IMG_3223.JPG",
+            "image/s23/IMG_3224.JPG",
+            "image/s23/IMG_3225.JPG",
+            "image/s23/IMG_3226.JPG"
+        ]
+    },
+    {
         id: 22,
         cover: "image/s22/IMG_3216.JPG",
         text: "火遍大街小巷的Coach Swagger,很特别的拼皮款,限时六折!!",
