@@ -3,6 +3,17 @@
  */
 var data = [
     {
+        id: 24,
+        cover: "image/s24/IMG_3229.JPG",
+        text: "574特价特价!直降140!799包邮哦,36以上都有货",
+        imgs: [
+            "image/s24/IMG_3229.JPG",
+            "image/s24/IMG_3230.JPG",
+            "image/s24/IMG_3231.JPG",
+            "image/s24/IMG_3232.JPG"
+        ]
+    },
+    {
         id: 23,
         cover: "image/s23/IMG_3221.JPG",
         text: "AJ 12 Tiffany 蓝黑 GS 38 美国直邮只需10天,Yo!小伙伴们还不快把蒂芙尼蓝穿在脚上",
