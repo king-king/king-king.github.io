@@ -30,14 +30,18 @@
 <script src="ZeroClipboard.min.js"></script>
 <script>
 
-//    var sc = document.createElement("script");
-//    sc.src = "ZeroClipboard.min.js";
-//    document.body.appendChild(sc);
-//    sc.onload = function () {
-        var clip = new ZeroClipboard(document.querySelector("#copy"));
-        clip.setText("你好");
-//    };
+    //    var sc = document.createElement("script");
+    //    sc.src = "ZeroClipboard.min.js";
+    //    document.body.appendChild(sc);
+    //    sc.onload = function () {
+    var clip = new ZeroClipboard(document.querySelector("#copy"));
+    clip.setText("你好");
+    //    };
 
+    ZeroClipboard.on("copy", function (e) {
+        clip.setText("你好");
+        console.log("copy")
+    });
 
 
 </script>
