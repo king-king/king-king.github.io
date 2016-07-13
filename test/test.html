@@ -28,11 +28,16 @@
     <div class="over"></div>
 </div>
 
-<script src="ZeroClipboard.min.js"></script>
 <script>
 
-    var clip = new ZeroClipboard(document.querySelector("#copy"));
-    clip.setText("王群");
+    var sc = document.createElement("script");
+    sc.src = "ZeroClipboard.min.js";
+    document.body.appendChild(sc);
+    sc.onload = function () {
+        var clip = new ZeroClipboard(document.querySelector("#copy"));
+        clip.setText("天闹滴呗");
+    };
+
 
 
 </script>
