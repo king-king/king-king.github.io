@@ -3,6 +3,41 @@
  */
 var data = [
     {
+        id: 27,
+        cover: "image/s27/IMG_3254.JPG",
+        text: "天梭T099.207 机械机芯 现亚马逊额外7折 米果2999包邮 每人会员限购一只。所以大家赶快行动~!",
+        imgs: [
+            "image/s27/IMG_3254.JPG"
+        ]
+    },
+    {
+        id: 26,
+        cover: "image/s26/IMG_3250.JPG",
+        text: "亚马逊 primeday天梭男女腕表白菜价,图1-图3 1999、2399、1788 图4Bose soundsports 6折799 均包邮",
+        imgs: [
+            "image/s26/IMG_3250.JPG",
+            "image/s26/IMG_3251.JPG",
+            "image/s26/IMG_3252.JPG",
+            "image/s26/IMG_3253.JPG"
+        ]
+    },
+    {
+        id: 25,
+        cover: "image/s25/IMG_3241.JPG",
+        text: "Clarks 英国老牌休闲鞋,非常好穿!现在特价一双699,某宝某猫的价格都快赶上米果两倍了,款式不止这些,有兴趣的小伙伴私信米果",
+        imgs: [
+            "image/s25/IMG_3241.JPG",
+            "image/s25/IMG_3242.JPG",
+            "image/s25/IMG_3243.JPG",
+            "image/s25/IMG_3244.JPG",
+            "image/s25/IMG_3245.JPG",
+            "image/s25/IMG_3246.JPG",
+            "image/s25/IMG_3247.JPG",
+            "image/s25/IMG_3248.JPG",
+            "image/s25/IMG_3249.JPG"
+        ]
+    },
+    {
         id: 24,
         cover: "image/s24/IMG_3229.JPG",
         text: "574特价特价!直降140!799包邮哦,36以上都有货",
