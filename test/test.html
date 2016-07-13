@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <style>
+        #copy {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+
+        #copy, .over {
+            width: 100px;
+            height: 40px;
+            background-color: black;
+        }
+
+        .over {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div id="copy">
+    <div class="over"></div>
+</div>
+
+<script src="ZeroClipboard.min.js"></script>
+<script>
+
+    var clip = new ZeroClipboard(document.querySelector(".copy"));
+    clip.setText("王群");
+
+
+
+</script>
+
+</body>
+
+</html>
