@@ -27,20 +27,21 @@
 <div id="copy">
     <div class="over"></div>
 </div>
-<script src="ZeroClipboard.min.js"></script>
+<!--<script src="ZeroClipboard.min.js"></script>-->
 <script>
 
-    //    var sc = document.createElement("script");
-    //    sc.src = "ZeroClipboard.min.js";
-    //    document.body.appendChild(sc);
-    //    sc.onload = function () {
-    var clip = new ZeroClipboard(document.querySelector("#copy"));
-    //    };
-
-    ZeroClipboard.on("copy", function (e) {
-        clip.setText("你好");
-        console.log("copy")
-    });
+    var sc = document.createElement("script");
+    sc.src = "ZeroClipboard.min.js";
+    document.body.appendChild(sc);
+    sc.onload = function () {
+        setTimeout(function () {
+            var clip = new ZeroClipboard(document.querySelector("#copy"));
+            ZeroClipboard.on("copy", function (e) {
+                clip.setText("你好");
+                console.log("copy")
+            });
+        }, 0);
+    };
 
 
 </script>
