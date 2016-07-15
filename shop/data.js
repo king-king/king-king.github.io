@@ -3,6 +3,18 @@
  */
 var data = [
     {
+        id: 28,
+        cover: "image/s28/IMG_3255.JPG",
+        text: "Air max 90 Ultra Essential 直降200,现价699包邮 男款码全!要的快来哦!!",
+        imgs: [
+            "image/s28/IMG_3255.JPG",
+            "image/s28/IMG_3256.JPG",
+            "image/s28/IMG_3257.JPG",
+            "image/s28/IMG_3258.JPG",
+            "image/s28/IMG_3259.JPG"
+        ]
+    },
+    {
         id: 27,
         cover: "image/s27/IMG_3254.JPG",
         text: "天梭T099.207 机械机芯 现亚马逊额外7折 米果2999包邮 每人会员限购一只。所以大家赶快行动~!",
