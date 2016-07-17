@@ -3,6 +3,68 @@
  */
 var data = [
     {
+        id: 34,
+        cover: "image/s34/IMG_3277.JPG",
+        text: "有喜欢任天堂公仔的吗?很萌哦",
+        imgs: [
+            "image/s34/IMG_3277.JPG",
+            "image/s34/IMG_3278.JPG",
+            "image/s34/IMG_3279.JPG"
+        ]
+    },
+    {
+        id: 33,
+        cover: "image/s33/IMG_3273.JPG",
+        text: "Vince 走极简文艺风的领袖,经典款长肩带,1100,皮质很软,值得拥有",
+        imgs: [
+            "image/s33/IMG_3273.JPG",
+            "image/s33/IMG_3274.JPG",
+            "image/s33/IMG_3275.JPG",
+            "image/s33/IMG_3276.JPG"
+        ]
+    },
+    {
+        id: 32,
+        cover: "image/s32/IMG_3270.JPG",
+        text: "MK家的背包也好看,挎包拿惯了的伙伴们还不快给自己换个风格~纯皮白色,1650,转发本条至朋友圈的再减50哦",
+        imgs: [
+            "image/s32/IMG_3270.JPG",
+            "image/s32/IMG_3271.JPG",
+            "image/s32/IMG_3272.JPG"
+        ]
+    },
+    {
+        id: 31,
+        cover: "image/s31/IMG_3267.JPG",
+        text: "Coach纯皮,两色,限时促销1300,转发朋友圈再减50,快行动起来吧~!!",
+        imgs: [
+            "image/s31/IMG_3267.JPG",
+            "image/s31/IMG_3268.JPG",
+            "image/s31/IMG_3269.JPG"
+        ]
+    },
+    {
+        id: 30,
+        cover: "image/s30/IMG_3263.JPG",
+        text: "Rebecca Minkoff的小香风,颜色为图一,肩带可长可短,限时促销960,价格非常好,朋友们抓紧了",
+        imgs: [
+            "image/s30/IMG_3263.JPG",
+            "image/s30/IMG_3264.JPG",
+            "image/s30/IMG_3265.JPG",
+            "image/s30/IMG_3266.JPG"
+        ]
+    },
+    {
+        id: 29,
+        cover: "image/s29/IMG_3260.JPG",
+        text: "Tory Burch家的Reva平底芭蕾舞鞋,限时特价1150,将本信息复制到朋友圈再减50,爱美的女生不要错过哦!又美又好穿",
+        imgs: [
+            "image/s29/IMG_3260.JPG",
+            "image/s29/IMG_3261.JPG",
+            "image/s29/IMG_3262.JPG"
+        ]
+    },
+    {
         id: 28,
         cover: "image/s28/IMG_3255.JPG",
         text: "Air max 90 Ultra Essential 直降200,现价699包邮 男款码全!要的快来哦!!",
