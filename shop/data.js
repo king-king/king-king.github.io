@@ -5,7 +5,7 @@ var data = [
     {
         id: 37,
         cover: "image/s37/IMG_3299.JPG",
-        text: "部分号码现货!",
+        text: "喜欢的发号码给我哦",
         imgs: [
             "image/s37/IMG_3299.JPG",
             "image/s37/IMG_3300.JPG",
