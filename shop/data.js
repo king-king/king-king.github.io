@@ -3,6 +3,32 @@
  */
 var data = [
     {
+        id: 37,
+        cover: "image/s37/IMG_3299.JPG",
+        text: "部分号码现货!",
+        imgs: [
+            "image/s37/IMG_3299.JPG",
+            "image/s37/IMG_3300.JPG",
+            "image/s37/IMG_3301.JPG",
+            "image/s37/IMG_3302.JPG",
+            "image/s37/IMG_3303.JPG",
+            "image/s37/IMG_3304.JPG"
+        ]
+    },
+    {
+        id: 36,
+        cover: "image/s36/IMG_3293.JPG",
+        text: "部分号码现货!",
+        imgs: [
+            "image/s36/IMG_3293.JPG",
+            "image/s36/IMG_3294.JPG",
+            "image/s36/IMG_3295.JPG",
+            "image/s36/IMG_3296.JPG",
+            "image/s36/IMG_3297.JPG",
+            "image/s36/IMG_3298.JPG"
+        ]
+    },
+    {
         id: 35,
         cover: "image/s35/IMG_3283.JPG",
         text: "nmd 灰蓝 1466 大部分号码有货!周末发货哦",
