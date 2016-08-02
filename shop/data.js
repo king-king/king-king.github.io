@@ -3,14 +3,14 @@
  */
 var data = [
     {
-        id: 38,
-        cover: "image/s38/IMG_3316.JPG",
-        text: "乔5黑银 女码1360 男码1699 全码有货!两双44特价1599 价格包含邮费哦",
+        id: 39,
+        cover: "image/s39/IMG_3338.JPG",
+        text: "乔1高帮金牌 8月1日发售,蓝白1040,红白850,包邮到家哦",
         imgs: [
-            "image/s38/IMG_3316.JPG",
-            "image/s38/IMG_3317.JPG",
-            "image/s38/IMG_3318.JPG",
-            "image/s38/IMG_3319.JPG"
+            "image/s39/IMG_3338.JPG",
+            "image/s39/IMG_3339.JPG",
+            "image/s39/IMG_3340.JPG",
+            "image/s39/IMG_3341.JPG"
         ]
     },
     {
