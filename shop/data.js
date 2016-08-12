@@ -3,6 +3,15 @@
  */
 var data = [
     {
+        id: 40,
+        cover: "image/s40/IMG_3359.JPG",
+        text: "有没有穿大号鞋的MM?菲拉格慕镂空蝴蝶结鞋,原价5000+,现在半价促销,只要2700,粉色有39,40码。",
+        imgs: [
+            "image/s40/IMG_3359.JPG",
+            "image/s40/IMG_3360.JPG"
+        ]
+    },
+    {
         id: 39,
         cover: "image/s39/IMG_3338.JPG",
         text: "乔1高帮金牌 8月1日发售,蓝白1040,红白850,包邮到家哦",
