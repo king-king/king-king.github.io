@@ -1,7 +1,29 @@
 /**
  * Created by wq on 16/6/21.
  */
-var data = [
+var data = [{
+    id: 42,
+    cover: "image/s42/IMG_3370.JPG",
+    text: "女生福利,三款乔丹女码低价促销!经典蓝白只要730,男同胞们要流泪了,价格包含直邮费用哦!好价不等人。",
+    imgs: [
+        "image/s42/IMG_3370.JPG",
+        "image/s42/IMG_3371.JPG",
+        "image/s42/IMG_3372.JPG",
+        "image/s42/IMG_3373.JPG",
+        "image/s42/IMG_3374.JPG"
+    ]
+},
+    {
+        id: 41,
+        cover: "image/s41/IMG_3366.JPG",
+        text: "MK最近这款包非常火爆,不知道是不是跟杨幂同款有关,两个颜色目前已经最低折扣1380,要的朋友快来",
+        imgs: [
+            "image/s41/IMG_3366.JPG",
+            "image/s41/IMG_3367.JPG",
+            "image/s41/IMG_3368.JPG",
+            "image/s41/IMG_3369.JPG"
+        ]
+    },
     {
         id: 40,
         cover: "image/s40/IMG_3359.JPG",
