@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    -webkit-user-select: none;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: radial-gradient(#444, #000);
+}
+
+.lock {
+    pointer-events: none;
+}
+
+@font-face {
+    font-family: wq;
+    src: url("font.ttf") ;
+}
+
+.start-btn {
+    font-family: wq, impact, serif;
+    width: 240px;
+    height: 240px;
+    line-height: 240px;
+    font-size: 80px;
+    text-shadow: 0 0 30px #222;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    color: #ccc;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -120px;
+    margin-left: -120px;
+    cursor: pointer;
+}
+
+.head {
+    height: 60px;
+    line-height: 60px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 40px;
+    text-align: right;
+    color: #ddf;
+    font-family: wq, "微软雅黑", sans-serif;
+    font-size: 50px;
+}
+
+.win-board {
+    font-family: "幼圆", "微软雅黑", sans-serif;
+    height: 60px;
+    font-weight: bolder;
+    color: #fff;
+    font-size: 60px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    margin-top: -30px;
+    width: 100%;
+    text-shadow: 0 0 15px #333;
+}
+
+.cube-wrapper {
+    width: 600px;
+    height: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    cursor: pointer;
+    perspective: 1500px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+canvas {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+}
+
+.blackboard {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: #000;
+    margin-top: -150px;
+    margin-left: -150px;
+}
+
+.block {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: #000;
+}
+
+.block-inner {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    border-radius: 8px;
+}
+
+.front .block-inner {
+    background-color: #2a6496;
+}
+
+.left .block-inner {
+    background-color: darkred;
+}
+
+.right .block-inner {
+    background-color: yellow;
+}
+
+.back .block-inner {
+    background-color: #E87000;
+}
+
+.up .block-inner {
+    background-color: #5cb85c;
+}
+
+.bottom .block-inner {
+    background-color: #FF00FF;
+}
